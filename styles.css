@@ -458,13 +458,22 @@ h2 {
     }
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+/* モバイルメニュー（必要に応じて調整） */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+@media (max-width: 800px) {
+  .menu-toggle { display: inline-block; }
+  .nav-links { display: none; }
+  .nav-links.open { display: block; }
 }
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+/* フェードイン効果 */
+.will-inview { opacity: 0; transform: translateY(12px); transition: opacity 600ms ease, transform 600ms ease; }
+.inview { opacity: 1; transform: none; }
+
+/* back-to-top はスクリプトで基本スタイル付与しているので必要に応じて上書き */
