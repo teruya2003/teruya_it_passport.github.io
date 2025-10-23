@@ -10,7 +10,10 @@
     <header>
         <div class="header-container">
             <h1 class="logo">株式会社 Systemy</h1>
-            <nav class="nav-links">
+            <!-- 追加: モバイル用メニューボタン -->
+            <button class="menu-toggle" aria-label="メニューを開閉" aria-expanded="false">☰</button>
+
+            <nav class="nav-links" id="main-nav">
                 <ul>
                     <li><a href="company.html">会社概要</a></li>
                     <li><a href="greeting.html">代表挨拶</a></li>
@@ -47,20 +50,21 @@
         <section id="services" class="section">
             <h2>サービス</h2>
             <p>弊社は主にIT資格の取得サポートの事業を行っています。</p>
+            <!-- 画像に loading と alt を追加 -->
             <div class="service-container">
                 <div class="service-item">
                     <h3>てるや＠未経験専門ITパスポート</h3>
-                    <img src="./instagram_profile.jpg">
+                    <img src="./instagram_profile.jpg" alt="Instagram プロフィール" loading="lazy">
                     <p>ITパスポートテーマで最大のInstagramアカウントにて、学習法や頻出用語を発信中</p>
                 </div>
                 <div class="service-item">
                     <h3>電子書籍『ITパスポート最短合格マニュアル』</h3>
-                    <img src="./ITpassport_freetext_thumbnail.jpg">
+                    <img src="./ITpassport_freetext_thumbnail.jpg" alt="電子書籍サムネイル" loading="lazy">
                     <p>仕事や家事、育児で忙しいIT未経験の方が2～3ヶ月で合格するための方法をまとめたオリジナルテキストを無料配布中。</p>
                 </div>
                 <div class="service-item">
                     <h3>オンラインスクール</h3>
-                    <img src="./ITpassport_goukakuproject_thumbnail.jpg">
+                    <img src="./ITpassport_goukakuproject_thumbnail.jpg" alt="オンラインスクールサムネイル" loading="lazy">
                     <p>IT未経験の方を2～3ヶ月でITパスポートに合格するためのサポートを実施中。</p>
                 </div>
             </div>
@@ -104,6 +108,59 @@
         <div class="footer-bottom">
             <p>&copy;2025. Teruya Hirahara</p>
         </div>
-    </footer>    
+    </footer>
+
+    <!-- 追加: クライアントサイドの JS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      // メニュー開閉
+      const btn = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('main-nav');
+      btn && btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open);
+      });
+
+      // セクションのフェードイン（IntersectionObserver）
+      const io = new IntersectionObserver((entries)=> {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('inview');
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold: 0.15});
+      document.querySelectorAll('.section, .service-item, .mvv-item, .footer-section').forEach(el => {
+        el.classList.add('will-inview');
+        io.observe(el);
+      });
+
+      // 内部リンクのスムーススクロール（ページ内アンカー）
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        });
+      });
+
+      // トップへ戻るボタン
+      const topBtn = document.createElement('button');
+      topBtn.className = 'back-to-top';
+      topBtn.textContent = '↑';
+      topBtn.title = 'トップへ戻る';
+      Object.assign(topBtn.style, {
+        position:'fixed', right:'18px', bottom:'18px', padding:'10px 12px',
+        display:'none', zIndex:1000, borderRadius:'6px', border:'none', background:'#333', color:'#fff', cursor:'pointer'
+      });
+      document.body.appendChild(topBtn);
+      window.addEventListener('scroll', () => {
+        topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+      });
+      topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    });
+    </script>
 </body>
 </html>
