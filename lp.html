@@ -5,233 +5,294 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ITパスポート 無料テキスト｜公式LINEで受け取る</title>
   <meta name="description" content="公式LINEに追加で『ITパスポート最短合格マニュアル（無料テキスト）』をプレゼント。未経験向け・短期合格サポート。">
-  <link rel="stylesheet" href="./css/styles.css">
-  <style>
-    :root{--bg:#fff;--accent:#00c300;--muted:#666;--card:#f8f8f8;--maxw:720px}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN",Meiryo,Arial; background:var(--bg); color:#111; -webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:18px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
-    .logo{font-weight:700;font-size:1.05rem}
-    .hero{padding:18px;background:linear-gradient(180deg,#fff 0,#fbfffb 100%);border-radius:12px;margin-top:8px}
-    .eyebrow{font-size:.85rem;color:var(--muted);margin-bottom:6px}
-    .title{font-size:1.5rem;margin:6px 0 8px}
-    .lead{color:var(--muted);line-height:1.5;margin-bottom:14px}
-    .thumbnail{width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin-bottom:12px}
-    .cta-group{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:10px;border:none;color:#fff;background:var(--accent);cursor:pointer;text-decoration:none;font-weight:700}
-    .btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
-    .features{display:grid;gap:10px;margin:16px 0}
-    .card{background:var(--card);padding:12px;border-radius:10px}
-    .small{font-size:.9rem;color:var(--muted)}
-    .steps{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
-    .step{min-width:160px;background:#fff;border-radius:10px;padding:10px;border:1px solid #eee}
-    .footer{padding:18px 0;color:var(--muted);font-size:.9rem}
-    .sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;width:min(720px,94%);display:flex;gap:8px;z-index:1100}
-    .sticky-cta .btn{flex:1}
-    /* modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:1200}
-    .modal{background:#fff;padding:14px;border-radius:12px;max-width:420px;width:100%}
-    .qr{width:100%;height:auto;border-radius:8px;margin:8px 0}
-    .close{background:transparent;border:none;font-size:1.2rem;cursor:pointer}
-    /* inview */
-    .will-inview{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
-    .inview{opacity:1;transform:none}
-    @media(min-width:720px){
-      .title{font-size:2rem}
-      .hero{display:flex;gap:14px;align-items:center}
-      .hero .col{flex:1}
-      .thumbnail{max-width:320px;height:200px}
-      .sticky-cta{display:none}
-    }
-
-    /* 追加: モバイルでヘッダーを非表示にしてファーストビューを広げる */
-    @media (max-width:720px) {
-      header { display: none !important; }
-      /* ヘッダーを消した分、必要ならトップ余白を調整（現在は不要なら削除） */
-      .wrap { padding-top: 12px; }
-    }
-  </style>
+  <link rel="stylesheet" href="./css/lp.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">株式会社 Systemy</div>
-      <a class="small" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
-    </header>
-
-    <main>
-      <section class="hero will-inview" id="hero">
-        <div class="col">
-          <div class="eyebrow">公式LINE追加で無料テキストをプレゼント</div>
-          <h1 class="title">未経験から合格へ。ITパスポート最短合格マニュアル</h1>
-          <p class="lead">仕事や家事で忙しい方でも、2〜3ヶ月で合格できる学習の進め方・頻出用語をまとめた完全無料のテキストを公式LINEで配布中。</p>
-
-          <div class="cta-group">
-            <button class="btn" id="btn-line">公式LINEに追加して受け取る</button>
-            <a class="btn ghost" id="btn-download" href="./pdfs/ITpassport_freetext.pdf" download>今すぐPDFをダウンロード</a>
-          </div>
+  <!-- ヒーローセクション -->
+  <section class="hero-section" id="hero">
+    <div class="hero-container">
+      <div class="hero-badge">🎁 完全無料プレゼント</div>
+      <h1 class="hero-title">
+        未経験から<span class="highlight">2-3ヶ月で合格</span><br>
+        ITパスポート最短合格マニュアル
+      </h1>
+      <p class="hero-subtitle">
+        仕事や家事で忙しい方でも、効率的に学習できる完全無料のテキスト。<br>
+        公式LINEに追加するだけで<strong>今すぐ受け取れます</strong>。
+      </p>
+      
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-number">1,000+</div>
+          <div class="stat-text">人が既に受け取り</div>
         </div>
+        <div class="stat-box">
+          <div class="stat-number">2-3ヶ月</div>
+          <div class="stat-text">で合格可能</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">完全無料</div>
+          <div class="stat-text">追加費用なし</div>
+        </div>
+      </div>
 
-        <img class="thumbnail" src="./images/ITpassport_freetext_thumbnail.jpg" alt="ITパスポート 無料テキスト 表紙" loading="lazy">
+      <div class="hero-cta">
+        <button class="btn-primary btn-large" id="btn-hero-line">
+          <span class="btn-icon">📱</span>
+          <span class="btn-text">公式LINEに追加して無料で受け取る</span>
+        </button>
+        <p class="cta-hint">※ 30秒で完了・追加後すぐにダウンロード可能</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 限定特典バナー -->
+  <section class="bonus-section">
+    <div class="container">
+      <div class="bonus-card">
+        <div class="bonus-icon">🎉</div>
+        <h2 class="bonus-title">LINE追加限定特典</h2>
+        <p class="bonus-text">テキストを受け取った方だけの追加コンテンツを無料プレゼント</p>
+        <ul class="bonus-list">
+          <li>✓ 頻出問題まとめシート</li>
+          <li>✓ 2-3ヶ月学習スケジュールテンプレート</li>
+          <li>✓ 試験直前チェックリスト</li>
+          <li>✓ 合格者限定情報の配信</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 合格実績セクション -->
+  <section class="results-section">
+    <div class="container">
+      <h2 class="section-title">合格実績</h2>
+      <p class="section-subtitle">IT未経験者でも短期間で合格！多くの方が成果を出しています</p>
+      
+      <!-- 合格実績1: 右スクロール（左から右へ） -->
+      <div class="results-gallery-wrapper">
+        <h3 class="gallery-title">合格実績 ギャラリー</h3>
+        <div class="results-gallery results-gallery-right" id="resultsGallery1">
+          <img src="./images/合格実績1/S__125722631_0.jpg" alt="合格実績1" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722632_0.jpg" alt="合格実績2" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722633_0.jpg" alt="合格実績3" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722634_0.jpg" alt="合格実績4" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722635_0.jpg" alt="合格実績5" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722636_0.jpg" alt="合格実績6" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722637_0.jpg" alt="合格実績7" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722638_0.jpg" alt="合格実績8" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722639_0.jpg" alt="合格実績9" class="result-image" loading="lazy">
+          <img src="./images/合格実績1/S__125722640_0.jpg" alt="合格実績10" class="result-image" loading="lazy">
+        </div>
+      </div>
+
+      <!-- 合格実績2: 左スクロール（右から左へ） -->
+      <div class="results-gallery-wrapper">
+        <div class="results-gallery results-gallery-left" id="resultsGallery2">
+          <img src="./images/合格実績2/S__125722642_0.jpg" alt="合格実績1" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722643_0.jpg" alt="合格実績2" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722644_0.jpg" alt="合格実績3" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722645_0.jpg" alt="合格実績4" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722646_0.jpg" alt="合格実績5" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722647_0.jpg" alt="合格実績6" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722648_0.jpg" alt="合格実績7" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722649_0.jpg" alt="合格実績8" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722650_0.jpg" alt="合格実績9" class="result-image" loading="lazy">
+          <img src="./images/合格実績2/S__125722651_0.jpg" alt="合格実績10" class="result-image" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- こんな人におすすめ -->
+  <section class="target-section">
+    <div class="container">
+      <h2 class="section-title">こんな方におすすめです</h2>
+      <div class="target-grid">
+        <div class="target-card">
+          <div class="target-icon">👤</div>
+          <h3>IT未経験の方</h3>
+          <p>IT知識ゼロからでも安心して学習できる内容になっています</p>
+        </div>
+        <div class="target-card">
+          <div class="target-icon">⏰</div>
+          <h3>忙しい社会人の方</h3>
+          <p>1日1時間程度の勉強で2-3ヶ月での合格が可能です</p>
+        </div>
+        <div class="target-card">
+          <div class="target-icon">🎯</div>
+          <h3>効率的に学習したい方</h3>
+          <p>無駄を省いた学習法で短期合格を実現できます</p>
+        </div>
+        <div class="target-card">
+          <div class="target-icon">💰</div>
+          <h3>無料で質の高い教材が欲しい方</h3>
+          <p>完全無料ながら、有料級の内容を提供しています</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- テキストの内容 -->
+  <section class="content-section">
+    <div class="container">
+      <h2 class="section-title">このテキストで手に入るもの</h2>
+      <div class="content-grid">
+        <div class="content-card">
+          <div class="content-number">01</div>
+          <h3 class="content-title">効率的な学習法</h3>
+          <p class="content-description">忙しい社会人でも続けられる短時間学習のコツ。頻出ワード200選と詳細解説付きで、効率的に知識を身につけられます。</p>
+        </div>
+        <div class="content-card">
+          <div class="content-number">02</div>
+          <h3 class="content-title">実践的な問題対策</h3>
+          <p class="content-description">実際の試験形式に近い練習問題50問と丁寧な解説。弱点を効率的に補強し、本番で確実に得点できる力を養います。</p>
+        </div>
+        <div class="content-card">
+          <div class="content-number">03</div>
+          <h3 class="content-title">学習スケジュール</h3>
+          <p class="content-description">2-3ヶ月で合格するための具体的な学習計画。あなたのペースに合わせて調整可能なフレキシブルな設計です。</p>
+        </div>
+        <div class="content-card">
+          <div class="content-number">04</div>
+          <h3 class="content-title">合格のポイント</h3>
+          <p class="content-description">試験で落とし穴になりやすいポイントを徹底解説。未経験者でも安心して合格を目指せる詳細なガイドです。</p>
+        </div>
+      </div>
+    </div>
       </section>
 
-      <section class="features will-inview" id="features">
-        <div class="card">
-          <strong>あなたに合った学習法</strong>
-          <div class="small">短時間で効率よく覚えるコツ・頻出ワードの解説を収録</div>
+  <!-- 受け取りまでの流れ -->
+  <section class="howto-section">
+    <div class="container">
+      <h2 class="section-title">受け取りまでの流れ</h2>
+      <p class="section-subtitle">たった3ステップで完了！30秒で受け取れます</p>
+      <div class="steps-container">
+        <div class="step-item">
+          <div class="step-circle">1</div>
+          <h3 class="step-title">公式LINEに追加</h3>
+          <p class="step-text">下のボタンから公式LINEを友だち追加してください</p>
         </div>
-        <div class="card">
-          <strong>実践的な問題対策</strong>
-          <div class="small">実際の試験に近い練習問題と解説つき</div>
+        <div class="step-arrow">→</div>
+        <div class="step-item">
+          <div class="step-circle">2</div>
+          <h3 class="step-title">自動でテキストを受け取る</h3>
+          <p class="step-text">追加後、すぐにダウンロードリンクが届きます</p>
         </div>
-        <div class="card">
-          <strong>サポート情報</strong>
-          <div class="small">LINE追加者限定のお知らせや勉強会の案内あり</div>
+        <div class="step-arrow">→</div>
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <h3 class="step-title">PDFをダウンロード</h3>
+          <p class="step-text">リンクをタップして、すぐに学習を始められます</p>
+        </div>
+      </div>
+      <div class="cta-center">
+        <button class="btn-primary btn-large" id="btn-howto-line">
+          <span class="btn-icon">📱</span>
+          <span class="btn-text">今すぐ公式LINEに追加して受け取る</span>
+        </button>
+      </div>
         </div>
       </section>
 
-      <section class="will-inview" id="how">
-        <h2>受け取りまでの流れ</h2>
-        <div class="steps">
-          <div class="step">
-            <strong>1</strong>
-            <div class="small">「公式LINEに追加」ボタンを押す</div>
+  <!-- よくある質問 -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">よくある質問</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-q-icon">Q.</span>
+            <span class="faq-q-text">本当に無料ですか？</span>
+            <button class="faq-toggle" aria-label="開閉"></button>
           </div>
-          <div class="step">
-            <strong>2</strong>
-            <div class="small">トークで「無料テキスト希望」と送信</div>
+          <div class="faq-answer">
+            <p>はい、完全無料です。公式LINEに追加するだけで、テキストを無料で受け取れます。追加費用や登録料などは一切かかりません。</p>
           </div>
-          <div class="step">
-            <strong>3</strong>
-            <div class="small">PDFダウンロードリンクを受け取る</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-q-icon">Q.</span>
+            <span class="faq-q-text">未経験でも理解できますか？</span>
+            <button class="faq-toggle" aria-label="開閉"></button>
+          </div>
+          <div class="faq-answer">
+            <p>はい。IT未経験者向けに、専門用語もわかりやすく解説しています。このテキストだけで合格できる内容になっています。</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-q-icon">Q.</span>
+            <span class="faq-q-text">どのくらいの期間で合格できますか？</span>
+            <button class="faq-toggle" aria-label="開閉"></button>
+          </div>
+          <div class="faq-answer">
+            <p>このテキストに沿って学習すれば、1日1時間程度の勉強で2-3ヶ月での合格が可能です。学習スケジュールも含まれています。</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-q-icon">Q.</span>
+            <span class="faq-q-text">LINEを削除すると使えなくなりますか？</span>
+            <button class="faq-toggle" aria-label="開閉"></button>
+          </div>
+          <div class="faq-answer">
+            <p>一度ダウンロードしたPDFファイルは、LINEを削除してもそのまま使用できます。ただし、追加特典情報はLINE経由でお届けしています。</p>
+          </div>
+        </div>
           </div>
         </div>
       </section>
 
-      <section class="will-inview" id="faq">
-        <h2>よくある質問</h2>
-        <div class="card">
-          <strong>Q. 本当に無料ですか？</strong>
-          <div class="small">A. はい。公式LINEに追加すると無料で受け取れます。</div>
+  <!-- 最後のCTA -->
+  <section class="final-cta-section">
+    <div class="container">
+      <h2 class="final-cta-title">今すぐ無料で受け取りましょう</h2>
+      <p class="final-cta-text">公式LINEに追加するだけで、ITパスポート最短合格マニュアルを無料プレゼント</p>
+      <button class="btn-primary btn-large btn-pulse" id="btn-final-line">
+        <span class="btn-icon">📱</span>
+        <span class="btn-text">公式LINEに追加して無料で受け取る</span>
+      </button>
+      <p class="final-cta-note">※ 追加後すぐにテキストをダウンロードできます</p>
         </div>
       </section>
-    </main>
 
+  <!-- フッター -->
     <footer class="footer">
-      <div>©2025 Teruya Hirahara — 株式会社 Systemy</div>
+    <div class="container">
+      <p>&copy; 2025 Teruya Hirahara — 株式会社 Systemy</p>
+    </div>
     </footer>
-  </div>
 
   <!-- Sticky CTA（モバイル） -->
   <div class="sticky-cta">
-    <button class="btn" id="sticky-line">公式LINEに追加して受け取る</button>
-    <a class="btn ghost" href="./ITpassport_freetext.pdf" download>PDFを受け取る</a>
+    <button class="btn-primary btn-sticky" id="sticky-line">
+      <span class="btn-icon">📱</span>
+      <span class="btn-text">公式LINEに追加</span>
+    </button>
   </div>
 
   <!-- LINE モーダル（PC 用 QR 表示） -->
   <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal" role="document">
-      <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="modal-header">
         <strong>公式LINE 追加</strong>
-        <button class="close" id="modal-close" aria-label="閉じる">✕</button>
+        <button class="modal-close" id="modal-close" aria-label="閉じる">✕</button>
       </div>
-      <p class="small">スマホでボタンを押すとLINEアプリが開きます。PCの方はQRコードを読み取って追加してください。</p>
-      <img class="qr" src="./images/line_qr.png" alt="公式LINE QRコード" loading="lazy">
-      <div style="display:flex;gap:8px">
-        <a id="modal-line-open" class="btn" href="#" rel="noopener noreferrer">LINEを開く</a>
-        <button id="copy-link" class="btn ghost">LINEリンクをコピー</button>
+      <div class="modal-body">
+        <p class="modal-text">スマホでボタンを押すとLINEアプリが開きます。PCの方はQRコードを読み取って追加してください。</p>
+        <img class="modal-qr" src="./images/line_qr.png" alt="公式LINE QRコード" loading="lazy">
+        <div class="modal-actions">
+          <a id="modal-line-open" class="btn-primary" href="#" rel="noopener noreferrer">
+            <span class="btn-icon">📱</span>
+            LINEを開く
+          </a>
+          <button id="copy-link" class="btn-secondary">LINEリンクをコピー</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    (function(){
-      const LINE_LINK = "https://line.me/R/ti/p/%40yourlineid"; // <-- 実際のLINEリンクに差し替えてください
-      const btnLine = document.getElementById('btn-line');
-      const stickyLine = document.getElementById('sticky-line');
-      const modal = document.getElementById('modal');
-      const modalClose = document.getElementById('modal-close');
-      const modalLineOpen = document.getElementById('modal-line-open');
-      const copyBtn = document.getElementById('copy-link');
-      const downloadBtn = document.getElementById('btn-download');
-
-      function isMobile(){
-        return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      }
-
-      function openLineDirect(){
-        // スマホなら直接LINEリンクへ。ブラウザがブロックしないよう、ユーザー操作時に遷移する。
-        window.location.href = LINE_LINK;
-      }
-
-      function openModal(){
-        modal.style.display = 'flex';
-        modal.setAttribute('aria-hidden','false');
-      }
-      function closeModal(){
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden','true');
-      }
-
-      // ボタン挙動：スマホは直接開く / PC はモーダルでQR表示
-      [btnLine, stickyLine].forEach(b => {
-        b && b.addEventListener('click', (e) => {
-          if (isMobile()) {
-            openLineDirect();
-          } else {
-            openModal();
-          }
-        });
-      });
-
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-      modalLineOpen.addEventListener('click', (e) => {
-        modalLineOpen.href = LINE_LINK;
-        // 新しいタブで開く（ユーザージェスチャ内）
-        window.open(LINE_LINK, '_blank');
-      });
-
-      copyBtn.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(LINE_LINK);
-          copyBtn.textContent = 'コピーしました';
-          setTimeout(()=> copyBtn.textContent = 'LINEリンクをコピー', 2000);
-        } catch (err) {
-          copyBtn.textContent = 'コピーに失敗';
-        }
-      });
-
-      // ダウンロード計測（localStorageで簡易トラッキング）
-      downloadBtn.addEventListener('click', () => {
-        try { localStorage.setItem('lp_free_text_downloaded','1'); } catch(e){}
-      });
-
-      // IntersectionObserver でフェードイン
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(en => {
-          if (en.isIntersecting) {
-            en.target.classList.add('inview');
-            io.unobserve(en.target);
-          }
-        });
-      }, {threshold: 0.12});
-      document.querySelectorAll('.will-inview').forEach(el => io.observe(el));
-
-      // ESC でモーダル閉じる
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-      // テスト用：もしLINE追加済みフラグがあればCTAを軽く変更
-      try {
-        if (localStorage.getItem('lp_line_added') === '1') {
-          btnLine.textContent = 'LINEに追加済み（感謝）';
-          stickyLine.textContent = '追加済み';
-        }
-      } catch(e){}
-    })();
-  </script>
+  <script src="./js/lp.js"></script>
 </body>
 </html>
