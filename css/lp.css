@@ -1,0 +1,38 @@
+:root{--bg:#fff;--accent:#00c300;--muted:#666;--card:#f8f8f8;--maxw:720px}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Hiragino Kaku Gothic ProN",Meiryo,Arial; background:var(--bg); color:#111; -webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.logo{font-weight:700;font-size:1.05rem}
+.hero{padding:18px;background:linear-gradient(180deg,#fff 0,#fbfffb 100%);border-radius:12px;margin-top:8px}
+.eyebrow{font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.title{font-size:1.5rem;margin:6px 0 8px}
+.lead{color:var(--muted);line-height:1.5;margin-bottom:14px}
+.thumbnail{width:100%;max-height:220px;object-fit:cover;border-radius:8px;margin-bottom:12px}
+.cta-group{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:10px;border:none;color:#fff;background:var(--accent);cursor:pointer;text-decoration:none;font-weight:700}
+.btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+.features{display:grid;gap:10px;margin:16px 0}
+.card{background:var(--card);padding:12px;border-radius:10px}
+.small{font-size:.9rem;color:var(--muted)}
+.steps{display:flex;gap:8px;overflow:auto;padding-bottom:6px}
+.step{min-width:160px;background:#fff;border-radius:10px;padding:10px;border:1px solid #eee}
+.footer{padding:18px 0;color:var(--muted);font-size:.9rem}
+.sticky-cta{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;width:min(720px,94%);display:flex;gap:8px;z-index:1100}
+.sticky-cta .btn{flex:1}
+/* modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:1200}
+.modal{background:#fff;padding:14px;border-radius:12px;max-width:420px;width:100%}
+.qr{width:100%;height:auto;border-radius:8px;margin:8px 0}
+.close{background:transparent;border:none;font-size:1.2rem;cursor:pointer}
+/* inview */
+.will-inview{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.inview{opacity:1;transform:none}
+@media(min-width:720px){
+  .title{font-size:2rem}
+  .hero{display:flex;gap:14px;align-items:center}
+  .hero .col{flex:1}
+  .thumbnail{max-width:320px;height:200px}
+  .sticky-cta{display:none}
+}
