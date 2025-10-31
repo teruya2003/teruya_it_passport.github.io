@@ -60,10 +60,12 @@
     document.body.style.overflow = '';
   }
 
+  const btnIntroLine = document.getElementById('btn-intro-line');
+  
   // ============================================
   // LINE追加ボタンの処理
   // ============================================
-  [btnHeroLine, btnHowtoLine, btnFinalLine, btnStickyLine].forEach(btn => {
+  [btnHeroLine, btnHowtoLine, btnFinalLine, btnStickyLine, btnIntroLine].forEach(btn => {
     if (!btn) return;
     btn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -179,7 +181,7 @@
 
   // アニメーション対象要素を監視
   const animatedElements = document.querySelectorAll(
-    '.hero-container, .bonus-card, .target-card, .content-card, .step-item, .faq-item, .stats-section'
+    '.hero-container, .bonus-card, .target-card, .content-card, .step-item, .faq-item, .stats-section, .hook-section, .pain-item, .solution-content, .text-intro-card, .line-cta-content'
   );
   
   animatedElements.forEach(el => {
