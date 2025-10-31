@@ -45,6 +45,13 @@
       .thumbnail{max-width:320px;height:200px}
       .sticky-cta{display:none}
     }
+
+    /* 追加: モバイルでヘッダーを非表示にしてファーストビューを広げる */
+    @media (max-width:720px) {
+      header { display: none !important; }
+      /* ヘッダーを消した分、必要ならトップ余白を調整（現在は不要なら削除） */
+      .wrap { padding-top: 12px; }
+    }
   </style>
 </head>
 <body>

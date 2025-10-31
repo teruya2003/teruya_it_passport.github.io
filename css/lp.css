@@ -49,6 +49,31 @@ header{
 .title{font-size:1.5rem;margin:6px 0 8px;font-weight:800;letter-spacing:-0.02em}
 .lead{color:var(--muted);line-height:1.6;margin-bottom:14px;font-size:0.98rem}
 
+/* Hero — 大判コピー用 */
+.hero-top{
+  background-image: url("../images/hero_bg.jpg"); /* 実画像に合わせて変更 */
+  background-size: cover;
+  background-position: center;
+  color:#fff;
+  padding:36px 20px;
+  border-radius:16px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.18);
+}
+.hero-top::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.18) 40%, rgba(0,0,0,0.06) 100%);
+  pointer-events:none;
+  border-radius:16px;
+}
+.hero-inner{position:relative; z-index:2; max-width:880px; margin:0 auto; text-align:center}
+.hero-copy{display:block; margin:8px 0 10px; line-height:1; font-weight:900; letter-spacing:-0.02em; text-shadow:0 8px 20px rgba(0,0,0,0.45)}
+.hero-copy span{display:block; font-size:48px}
+.hero-sub{margin:8px 0 18px; color:rgba(255,255,255,0.92); font-size:1.05rem}
+.hero-ctas{justify-content:center; margin-top:6px}
+
 /* Thumbnail */
 .thumbnail{
   width:100%;
@@ -159,4 +184,18 @@ img{max-width:100%;height:auto;display:block}
 @media(max-width:420px){
   .title{font-size:1.25rem}
   .btn{padding:10px 12px;font-size:0.95rem}
+}
+
+/* スマホで強調（小さい画面向け） */
+@media (max-width:420px){
+  .hero-top{padding:28px 14px}
+  .hero-copy span{font-size:34px}
+  .hero-sub{font-size:0.95rem}
+}
+
+/* タブレット〜PC */
+@media (min-width:720px){
+  .hero-copy span{font-size:74px}
+  .hero-top{padding:48px 28px}
+  .hero-sub{font-size:1.15rem}
 }
