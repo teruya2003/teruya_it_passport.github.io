@@ -304,6 +304,7 @@ img {
 
 .results-section .section-title {
   color: #ffffff;
+  font-size: clamp(2.2rem, 5vw, 3rem);
 }
 
 .results-section .section-subtitle {
@@ -312,17 +313,29 @@ img {
 }
 
 .results-gallery-wrapper {
-  margin: 40px 0;
-  overflow: hidden;
+  margin: 0 0 40px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
+  -webkit-overflow-scrolling: touch; /* iOS スムーススクロール */
+  scroll-behavior: smooth;
+  /* スクロールバーを非表示（必要に応じて） */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.results-gallery-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .gallery-title {
   font-size: 1.5rem;
   font-weight: 800;
   color: #ffd700;
-  margin-bottom: 30px;
+  margin: 40px 0 30px 0;
   text-align: center;
+  position: relative;
+  z-index: 10;
 }
 
 .results-gallery {
@@ -332,6 +345,112 @@ img {
   animation-duration: 60s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  /* タッチ操作を許可 */
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.results-gallery.scrolling {
+  animation-play-state: paused;
+}
+
+/* ホバー時は自動スクロールを一時停止（PCのみ） */
+.results-gallery-wrapper:hover .results-gallery {
+  animation-play-state: paused;
+}
+
+/* サポート実績セクション */
+.stats-section {
+  margin: 40px 0 60px 0;
+  padding: 40px 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.stats-section.inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stats-section-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 0.02em;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 30px 20px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.stats-section.inview .stat-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat-card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.stat-card:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.stat-card:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.stat-card:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(255, 215, 0, 0.25);
+  border-color: rgba(255, 215, 0, 0.6);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.3));
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffd700;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 /* 右スクロール（左から右へ） */
@@ -364,13 +483,18 @@ img {
 
 .result-image {
   flex: 0 0 auto;
-  width: 400px;
-  height: 600px;
+  width: 280px;
+  height: 420px;
   object-fit: cover;
   border-radius: 12px;
   border: 2px solid rgba(255, 215, 0, 0.2);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  /* タッチ操作を許可（画像をタッチしてもスクロール可能） */
+  touch-action: manipulation;
+  pointer-events: auto;
 }
 
 .result-image:hover {
@@ -871,12 +995,25 @@ img {
   }
 
   .result-image {
-    width: 300px;
-    height: 450px;
+    width: 210px;
+    height: 315px;
   }
 
   .results-gallery-wrapper {
     margin: 30px 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stats-section-title {
+    font-size: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
   }
 }
 
@@ -886,8 +1023,8 @@ img {
   }
 
   .result-image {
-    width: 280px;
-    height: 420px;
+    width: 196px;
+    height: 294px;
   }
 
   .results-section {
@@ -895,7 +1032,7 @@ img {
   }
 
   .gallery-title {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
   }
 
   .results-gallery {
@@ -913,5 +1050,31 @@ img {
 
   .stat-number {
     font-size: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .stats-section {
+    padding: 30px 16px;
+  }
+
+  .stats-section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .stat-card {
+    padding: 24px 16px;
+  }
+
+  .stat-value {
+    font-size: 1.8rem;
+  }
+
+  .stat-icon {
+    font-size: 2.5rem;
   }
 }

@@ -96,14 +96,14 @@
     modalLineOpen.addEventListener('click', function(e) {
       e.preventDefault();
       trackEvent('line_modal_open', {});
-      window.open(LINE_LINK, '_blank');
-    });
+    window.open(LINE_LINK, '_blank');
+  });
   }
 
   if (copyBtn) {
     copyBtn.addEventListener('click', async function() {
-      try {
-        await navigator.clipboard.writeText(LINE_LINK);
+    try {
+      await navigator.clipboard.writeText(LINE_LINK);
         this.textContent = '✓ コピーしました';
         this.style.background = 'var(--primary)';
         this.style.color = '#ffffff';
@@ -114,7 +114,7 @@
           this.style.background = '';
           this.style.color = '';
         }, 2000);
-      } catch (err) {
+    } catch (err) {
         this.textContent = 'コピーに失敗';
         trackEvent('line_link_copy_failed', { error: err.message });
       }
@@ -166,7 +166,12 @@
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in-up');
+        // stats-sectionの場合はinviewクラスを追加
+        if (entry.target.classList.contains('stats-section')) {
+          entry.target.classList.add('inview');
+        } else {
+          entry.target.classList.add('fade-in-up');
+        }
         observer.unobserve(entry.target);
       }
     });
@@ -174,7 +179,7 @@
 
   // アニメーション対象要素を監視
   const animatedElements = document.querySelectorAll(
-    '.hero-container, .bonus-card, .target-card, .content-card, .step-item, .faq-item'
+    '.hero-container, .bonus-card, .target-card, .content-card, .step-item, .faq-item, .stats-section'
   );
   
   animatedElements.forEach(el => {
@@ -260,7 +265,7 @@
   });
 
   // ============================================
-  // 合格実績ギャラリー（自動スクロール）
+  // 合格実績ギャラリー（自動スクロール + タッチ操作）
   // ============================================
   const resultsGallery1 = document.getElementById('resultsGallery1');
   const resultsGallery2 = document.getElementById('resultsGallery2');
@@ -279,13 +284,169 @@
     });
   }
   
+  // 自動スクロール管理機能（無限ループ改善版）
+  function setupTouchScroll(gallery, isRightScroll) {
+    if (!gallery) return;
+    
+    const wrapper = gallery.parentElement; // .results-gallery-wrapper
+    if (!wrapper) return;
+    
+    // 画像の幅を取得して、1セット分の幅を計算
+    const images = gallery.querySelectorAll('.result-image');
+    if (images.length === 0) return;
+    
+    const firstImage = images[0];
+    const imageWidth = firstImage.offsetWidth || 280;
+    const gap = 20;
+    const singleSetWidth = (imageWidth + gap) * images.length - gap; // 1セット分の幅
+    
+    let autoScrollInterval = null;
+    let isUserInteracting = false;
+    let isScrolling = false;
+    
+    // 無限ループチェック関数
+    function checkAndResetScroll() {
+      if (isScrolling) return; // リセット中は処理しない
+      
+      const scrollLeft = wrapper.scrollLeft;
+      const scrollWidth = wrapper.scrollWidth;
+      const clientWidth = wrapper.clientWidth;
+      const maxScroll = scrollWidth - clientWidth;
+      
+      // 右スクロールの場合：最後の画像に到達したら最初に戻る
+      if (isRightScroll) {
+        if (scrollLeft >= singleSetWidth - 10) { // 少し余裕を持たせる
+          isScrolling = true;
+          wrapper.scrollLeft = 0;
+          setTimeout(() => {
+            isScrolling = false;
+          }, 50);
+        }
+      } 
+      // 左スクロールの場合：最初の画像に到達したら最後に戻る
+      else {
+        if (scrollLeft <= 10) { // 少し余裕を持たせる
+          isScrolling = true;
+          wrapper.scrollLeft = singleSetWidth;
+          setTimeout(() => {
+            isScrolling = false;
+          }, 50);
+        }
+      }
+    }
+    
+    // 自動スクロール関数
+    function startAutoScroll() {
+      if (autoScrollInterval) return;
+      
+      autoScrollInterval = setInterval(() => {
+        if (!isUserInteracting && wrapper && !isScrolling) {
+          const currentScroll = wrapper.scrollLeft;
+          
+          // スクロール位置を更新
+          if (isRightScroll) {
+            wrapper.scrollLeft = currentScroll + 1; // 右スクロール（左から右へ）
+          } else {
+            wrapper.scrollLeft = currentScroll - 1; // 左スクロール（右から左へ）
+          }
+          
+          // 無限ループチェック
+          checkAndResetScroll();
+        }
+      }, 30); // 30msごとに更新（スムーズな動き）
+    }
+    
+    function stopAutoScroll() {
+      if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+      }
+    }
+    
+    // ユーザーがスクロールしているかを検出
+    let scrollTimeout = null;
+    let lastScrollLeft = wrapper.scrollLeft;
+    
+    wrapper.addEventListener('scroll', function() {
+      // ユーザーが手動でスクロールしているかチェック
+      const currentScroll = wrapper.scrollLeft;
+      const scrollDiff = Math.abs(currentScroll - lastScrollLeft);
+      
+      if (scrollDiff > 5) { // 5px以上動いていたらユーザー操作と判断
+        isUserInteracting = true;
+        stopAutoScroll();
+        
+        // 無限ループチェック（ユーザー操作時も）
+        checkAndResetScroll();
+      }
+      
+      lastScrollLeft = currentScroll;
+      
+      // スクロールが止まったら自動スクロールを再開
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isUserInteracting = false;
+        startAutoScroll();
+      }, 2000); // 2秒間操作がなければ再開
+    }, { passive: true });
+    
+    // タッチ開始時に自動スクロールを停止
+    wrapper.addEventListener('touchstart', function() {
+      isUserInteracting = true;
+      stopAutoScroll();
+    }, { passive: true });
+    
+    // タッチ終了時に一定時間後に自動スクロールを再開
+    wrapper.addEventListener('touchend', function() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isUserInteracting = false;
+        startAutoScroll();
+      }, 2000);
+    }, { passive: true });
+    
+    // ホバー時に自動スクロールを一時停止（PCのみ）
+    wrapper.addEventListener('mouseenter', function() {
+      stopAutoScroll();
+    });
+    
+    wrapper.addEventListener('mouseleave', function() {
+      if (!isUserInteracting) {
+        startAutoScroll();
+      }
+    });
+    
+    // 初期化：自動スクロールを開始
+    setTimeout(() => {
+      // 左スクロールの場合は、最初に右端に移動
+      if (!isRightScroll) {
+        setTimeout(() => {
+          const scrollWidth = wrapper.scrollWidth;
+          const clientWidth = wrapper.clientWidth;
+          wrapper.scrollLeft = scrollWidth - clientWidth;
+        }, 100);
+      }
+      
+      setTimeout(() => {
+        startAutoScroll();
+      }, 500);
+    }, 1000);
+  }
+  
   if (resultsGallery1) {
     duplicateImages(resultsGallery1);
+    setupTouchScroll(resultsGallery1, true); // 右スクロール
   }
   
   if (resultsGallery2) {
     duplicateImages(resultsGallery2);
+    setupTouchScroll(resultsGallery2, false); // 左スクロール
   }
+  
+  // ネイティブスクロールのスナップ動作を無効化（スムーズなスクロールのため）
+  document.querySelectorAll('.results-gallery-wrapper').forEach(wrapper => {
+    wrapper.style.scrollSnapType = 'none';
+  });
   
   // 画像読み込み完了時の処理
   document.querySelectorAll('.result-image').forEach(img => {
