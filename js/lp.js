@@ -181,7 +181,7 @@
 
   // アニメーション対象要素を監視
   const animatedElements = document.querySelectorAll(
-    '.hero-container, .bonus-card, .target-card, .content-card, .step-item, .faq-item, .stats-section, .hook-section, .pain-item, .solution-content, .text-intro-card, .line-cta-content'
+    '.will-inview, .content-card, .step-item, .faq-item, .stats-section, .pain-item, .text-offer-content, .intro-content, .story-item'
   );
   
   animatedElements.forEach(el => {
@@ -192,19 +192,48 @@
   // Sticky CTAの表示制御
   // ============================================
   const stickyCTA = document.querySelector('.sticky-cta');
+  const storySection = document.querySelector('.story-section');
   const finalCTASection = document.querySelector('.final-cta-section');
   
-  if (stickyCTA && finalCTASection) {
-    const stickyObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        // 最終CTAセクションが表示されている間はSticky CTAを非表示
-        stickyCTA.style.display = entry.isIntersecting ? 'none' : 'block';
+  if (stickyCTA) {
+    let hasShownSticky = false;
+    
+    // ストーリーセクションの監視
+    if (storySection) {
+      const storyObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          // 「私がITパスポートを教えることになった理由」ブロックが表示されたら、sticky CTAを表示
+          if (entry.isIntersecting && !hasShownSticky) {
+            hasShownSticky = true;
+            stickyCTA.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.3
       });
-    }, {
-      threshold: 0.1
-    });
 
-    stickyObserver.observe(finalCTASection);
+      storyObserver.observe(storySection);
+    }
+    
+    // 最終CTAセクションが表示されている間はSticky CTAを非表示
+    if (finalCTASection) {
+      const finalCTAObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (hasShownSticky) {
+            // 最終CTAセクションが表示されている間はSticky CTAを非表示
+            if (entry.isIntersecting) {
+              stickyCTA.classList.remove('visible');
+            } else {
+              stickyCTA.classList.add('visible');
+            }
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      finalCTAObserver.observe(finalCTASection);
+    }
   }
 
   // ============================================
@@ -444,7 +473,7 @@
     duplicateImages(resultsGallery2);
     setupTouchScroll(resultsGallery2, false); // 左スクロール
   }
-  
+
   // ネイティブスクロールのスナップ動作を無効化（スムーズなスクロールのため）
   document.querySelectorAll('.results-gallery-wrapper').forEach(wrapper => {
     wrapper.style.scrollSnapType = 'none';
