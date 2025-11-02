@@ -161,19 +161,22 @@
   // スクロールアニメーション
   // ============================================
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -100px 0px'
   };
 
   const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // stats-sectionの場合はinviewクラスを追加
-        if (entry.target.classList.contains('stats-section')) {
-          entry.target.classList.add('inview');
-        } else {
-          entry.target.classList.add('fade-in-up');
-        }
+        // requestAnimationFrameを使ってスムーズにアニメーションを開始
+        requestAnimationFrame(() => {
+          // stats-sectionの場合はinviewクラスを追加
+          if (entry.target.classList.contains('stats-section')) {
+            entry.target.classList.add('inview');
+          } else {
+            entry.target.classList.add('fade-in-up');
+          }
+        });
         observer.unobserve(entry.target);
       }
     });
