@@ -158,6 +158,35 @@
   });
 
   // ============================================
+  // スクロールダウン誘導
+  // ============================================
+  const scrollDownIndicator = document.querySelector('.scroll-down-indicator');
+  const painSection = document.querySelector('.pain-section');
+  
+  if (scrollDownIndicator && painSection) {
+    // 初期状態で確実に表示
+    scrollDownIndicator.classList.remove('hidden');
+    scrollDownIndicator.style.display = 'flex';
+    scrollDownIndicator.style.opacity = '1';
+    
+    // クリックで次のセクションにスクロール
+    scrollDownIndicator.addEventListener('click', function() {
+      painSection.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // スクロールしたら表示を非表示にする（遅延を追加）
+    let hasScrolled = false;
+    window.addEventListener('scroll', function() {
+      if (!hasScrolled && window.scrollY > 100) {
+        hasScrolled = true;
+        setTimeout(() => {
+          scrollDownIndicator.classList.add('hidden');
+        }, 500);
+      }
+    }, { passive: true });
+  }
+
+  // ============================================
   // スクロールアニメーション
   // ============================================
   const observerOptions = {
@@ -190,6 +219,54 @@
   animatedElements.forEach(el => {
     observer.observe(el);
   });
+
+  // フックコピーのアニメーション制御
+  const hookCopyBlock = document.querySelector('.hook-copy-block');
+  const hookCopyLine1 = document.querySelector('.hook-copy-line1');
+  const hookCopyLine2 = document.querySelector('.hook-copy-line2');
+  
+  if (hookCopyBlock && hookCopyLine1 && hookCopyLine2) {
+    const hookObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => {
+            hookCopyLine1.classList.add('animate-slide-in-left');
+            hookCopyLine2.classList.add('animate-slide-in-right');
+          });
+          hookObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    hookObserver.observe(hookCopyBlock);
+  }
+
+  // サポート実績アイテムのアニメーション制御
+  const supportAchievementItems = document.querySelectorAll('.support-achievement-item');
+  const supportAchievementsSection = document.querySelector('.support-achievements-section');
+  
+  if (supportAchievementItems.length > 0 && supportAchievementsSection) {
+    const achievementObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          supportAchievementItems.forEach((item, index) => {
+            requestAnimationFrame(() => {
+              item.classList.add('animate-slide-in');
+            });
+          });
+          achievementObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '0px 0px -100px 0px'
+    });
+
+    achievementObserver.observe(supportAchievementsSection);
+  }
 
   // ============================================
   // Sticky CTAの表示制御
