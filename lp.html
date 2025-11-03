@@ -19,7 +19,7 @@
     <!-- LP冒頭画像 -->
     <div class="hook-image-block">
       <img src="./images/LP冒頭画像（女性＆こうすればよかったんだ！）.png" alt="こうすればよかったんだ！" class="hook-image">
-    </div>
+      </div>
     
     <!-- 説明ブロック -->
     <div class="hook-description-block">
@@ -61,7 +61,7 @@
   <!-- 3. 悩みを解決できることの証明（サポート実績等） -->
   <section class="proof-section will-inview" id="proof">
     <div class="container">
-      <h2 class="section-title">そんなお悩み解決できます！</h2>
+      <h2 class="section-title">そんなお悩み解決します！</h2>
       <p class="section-subtitle">IT未経験者でも短期間で合格！多くの方が成果を出しています</p>
     </div>
     
@@ -144,6 +144,11 @@
           これらの豊富な実績とサポート経験から得られたノウハウを、<br>
           完全無料のテキストにまとめました。
         </p>
+        <!-- 凝縮されたノウハウへ誘導：下向きダブル矢印 -->
+        <div class="condensed-indicator will-inview" aria-hidden="true">
+          <span class="chevron-down chevron-left"></span>
+          <span class="chevron-down chevron-right"></span>
+        </div>
       </div>
     </div>
   </section>
@@ -242,28 +247,16 @@
           <img src="./images/公式LINE追加時画像/3.png" alt="テキスト受け取り" class="step-image" loading="lazy">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 7. 受け取りボタン -->
-  <section class="line-cta-section will-inview" id="line-cta">
-    <div class="container">
-      <div class="line-cta-content">
-        <h2 class="line-cta-title">今すぐ無料で受け取りましょう</h2>
-        <p class="line-cta-text">
-          公式LINEに追加するだけで、<strong>ITパスポート最短合格マニュアル</strong>を無料で受け取れます。<br>
-          追加後すぐにダウンロードできます。30秒で完了します。
-        </p>
-        <div class="line-cta-button-wrapper">
-          <button class="btn-primary btn-large" id="btn-intro-line">
-            <span class="btn-icon">📱</span>
-            <span class="btn-text">公式LINEに追加して無料で受け取る</span>
-          </button>
-          <p class="line-cta-hint">※ 追加費用・登録料は一切かかりません</p>
-        </div>
+      <!-- 受け取りボタン（受け取り方法セクションの最後に配置） -->
+      <div class="line-cta-button-wrapper" style="margin-top: 24px; text-align: center;">
+        <button class="btn-image-reset" id="btn-howto-line">
+          <img src="./images/テキスト受け取りボタン.png" alt="公式LINEに追加して無料で受け取る" class="line-cta-image">
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- 7. 受け取りボタン（削除済み） -->
 
   <!-- 8. 自己紹介 -->
   <section class="intro-section will-inview" id="intro">
@@ -356,12 +349,12 @@
       <h2 class="final-cta-title">今すぐ無料で受け取りましょう</h2>
       <p class="final-cta-text">公式LINEに追加するだけで、ITパスポート最短合格マニュアルを無料プレゼント</p>
       <button class="btn-primary btn-large btn-pulse" id="btn-final-line">
-        <span class="btn-icon">📱</span>
+          <span class="btn-icon">📱</span>
         <span class="btn-text">公式LINEに追加して無料で受け取る</span>
-      </button>
+        </button>
       <p class="final-cta-note">※ 追加後すぐにテキストをダウンロードできます</p>
-    </div>
-  </section>
+        </div>
+      </section>
 
   <!-- 12. よくある質問 -->
   <section class="faq-section will-inview" id="faq">
@@ -408,16 +401,16 @@
             <p>一度ダウンロードしたPDFファイルは、LINEを削除してもそのまま使用できます。ただし、追加特典情報はLINE経由でお届けしています。</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+          </div>
+        </div>
+      </section>
 
   <!-- 13. フッター -->
-  <footer class="footer">
+    <footer class="footer">
     <div class="container">
       <p>&copy; 2025 Teruya Hirahara — 株式会社 Systemy</p>
     </div>
-  </footer>
+    </footer>
 
   <!-- Sticky CTA（モバイル） -->
   <div class="sticky-cta">

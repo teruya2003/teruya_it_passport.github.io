@@ -603,6 +603,35 @@ img {
   margin: 0;
 }
 
+/* 凝縮されたノウハウへ誘導：ダブル下矢印 */
+.condensed-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.chevron-down {
+  width: 18px;
+  height: 18px;
+  border-right: 3px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
+  opacity: 0.9;
+  transform: rotate(45deg);
+  animation: chevronPulse 1.6s infinite ease-in-out;
+}
+
+.chevron-right {
+  animation-delay: 0.2s;
+}
+
+@keyframes chevronPulse {
+  0% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
+  50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
+  100% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
+}
+
 /* ============================================
    テキストオファーパート
    ============================================ */
@@ -800,6 +829,25 @@ img {
 
 .line-cta-button-wrapper {
   margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 画像ボタン用のリセット（背景や余白を無効化） */
+.btn-image-reset {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.line-cta-image {
+  width: min(100%, 420px);
+  height: auto;
+  display: block;
 }
 
 .line-cta-hint {
