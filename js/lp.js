@@ -587,39 +587,44 @@
 
 // 追加: 受け取りボタンにバウンドクラスを付与 / 停止する制御
 (function(){
-  const howtoBtn = document.getElementById('btn-howto-line');
-  if (!howtoBtn) return;
+  // バウンスアニメーションを適用するボタンのIDリスト
+  const buttonIds = ['btn-howto-line', 'btn-final-line'];
+  
+  buttonIds.forEach(buttonId => {
+    const btn = document.getElementById(buttonId);
+    if (!btn) return;
 
-  const startBounce = () => howtoBtn.classList.add('is-bouncing');
-  const stopBounce  = () => howtoBtn.classList.remove('is-bouncing');
+    const startBounce = () => btn.classList.add('is-bouncing');
+    const stopBounce  = () => btn.classList.remove('is-bouncing');
 
-  // ページ読み込み後に少し遅らせて開始
-  window.requestAnimationFrame(() => {
-    setTimeout(() => {
-      // IntersectionObserver が使えるなら視界に入ったら開始・停止
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(en => {
-            if (en.isIntersecting) startBounce();
-            else stopBounce();
-          });
-        }, { threshold: 0.35 });
-        io.observe(howtoBtn);
-      } else {
-        startBounce();
-      }
-    }, 600);
-  });
+    // ページ読み込み後に少し遅らせて開始
+    window.requestAnimationFrame(() => {
+      setTimeout(() => {
+        // IntersectionObserver が使えるなら視界に入ったら開始・停止
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+              if (en.isIntersecting) startBounce();
+              else stopBounce();
+            });
+          }, { threshold: 0.35 });
+          io.observe(btn);
+        } else {
+          startBounce();
+        }
+      }, 600);
+    });
 
-  // ホバー／フォーカス中はアニメを停止（アクセシビリティ向上）
-  howtoBtn.addEventListener('mouseenter', stopBounce);
-  howtoBtn.addEventListener('mouseleave', startBounce);
-  howtoBtn.addEventListener('focus', stopBounce);
-  howtoBtn.addEventListener('blur', startBounce);
+    // ホバー／フォーカス中はアニメを停止（アクセシビリティ向上）
+    btn.addEventListener('mouseenter', stopBounce);
+    btn.addEventListener('mouseleave', startBounce);
+    btn.addEventListener('focus', stopBounce);
+    btn.addEventListener('blur', startBounce);
 
-  // クリック時は一旦停止してから再開（不意の動きを抑える）
-  howtoBtn.addEventListener('click', () => {
-    stopBounce();
-    setTimeout(startBounce, 800);
+    // クリック時は一旦停止してから再開（不意の動きを抑える）
+    btn.addEventListener('click', () => {
+      stopBounce();
+      setTimeout(startBounce, 800);
+    });
   });
 })();

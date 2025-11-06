@@ -391,7 +391,7 @@ img {
    証明パート（サポート実績）
    ============================================ */
 .proof-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: var(--bg-light);
 }
 
@@ -636,7 +636,7 @@ img {
    テキストオファーパート
    ============================================ */
 .text-offer-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: #ffffff;
   text-align: center;
@@ -915,7 +915,7 @@ img {
    合格実績セクション
    ============================================ */
 .results-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: #000000;
   color: #ffffff;
   position: relative;
@@ -1157,7 +1157,7 @@ img {
    自己紹介セクション
    ============================================ */
 .intro-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: #ffffff;
 }
 
@@ -1207,7 +1207,7 @@ img {
    ストーリーセクション
    ============================================ */
 .story-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: var(--bg-light);
 }
 
@@ -1324,8 +1324,68 @@ img {
    コンテンツセクション
    ============================================ */
 .content-section {
-  padding: 80px var(--spacing);
+  padding: 0;
   background: #ffffff;
+}
+
+/* 背景画像ラッパー */
+.content-background-wrapper {
+  position: relative;
+  margin: 0;
+  padding: 40px 0;
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* 背景画像グリッド */
+.content-background-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  gap: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  align-items: start;
+}
+
+.content-bg-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  filter: brightness(0.25);
+  opacity: 0.8;
+  display: block;
+}
+
+/* コンテンツ部分 */
+.content-content-section {
+  position: relative;
+  z-index: 1;
+  padding: 40px 0;
+}
+
+.content-content-section .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.content-content-section .section-title {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 16px rgba(0, 0, 0, 0.5);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
 }
 
 .content-image-wrapper {
@@ -1349,10 +1409,11 @@ img {
 
 .content-card {
   padding: 40px 30px;
-  background: var(--bg-light);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: var(--radius);
   border-left: 4px solid var(--primary);
   transition: transform 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .content-card:hover {
@@ -1384,7 +1445,7 @@ img {
    受け取り方法セクション
    ============================================ */
 .howto-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: var(--bg-dark);
 }
 
@@ -1471,7 +1532,7 @@ img {
    FAQセクション
    ============================================ */
 .faq-section {
-  padding: 50px var(--spacing) 80px var(--spacing);
+  padding: 30px var(--spacing) 80px var(--spacing);
   background: #ffffff;
 }
 
@@ -1554,7 +1615,7 @@ img {
    最終CTAセクション
    ============================================ */
 .final-cta-section {
-  padding: 100px var(--spacing);
+  padding: 40px var(--spacing) 40px var(--spacing);
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: #ffffff;
   text-align: center;
@@ -1629,6 +1690,13 @@ img {
   width: 100%;
   padding: 16px;
   font-size: 1rem;
+}
+
+.sticky-cta-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ============================================
@@ -1869,7 +1937,7 @@ img {
   }
 
   .final-cta-section {
-    padding: 60px var(--spacing);
+    padding: 30px var(--spacing) 30px var(--spacing);
   }
 
   .modal-actions {
@@ -2080,23 +2148,28 @@ img {
 }
 
 /* バウンドを付与するクラス（IDで指定） */
-#btn-howto-line.is-bouncing {
+#btn-howto-line.is-bouncing,
+#btn-final-line.is-bouncing {
   animation: lp-bounce 1.6s cubic-bezier(.22,.9,.3,1) infinite;
   will-change: transform;
 }
 
 /* ホバー・フォーカス時はアニメ停止（ユーザー操作中の邪魔を防ぐ） */
 #btn-howto-line:hover,
-#btn-howto-line:focus {
+#btn-howto-line:focus,
+#btn-final-line:hover,
+#btn-final-line:focus {
   animation-play-state: paused !important;
 }
 
 /* 画面幅が大きいときは控えめに */
 @media (min-width: 720px) {
-  #btn-howto-line.is-bouncing { animation-duration: 1.2s; }
+  #btn-howto-line.is-bouncing,
+  #btn-final-line.is-bouncing { animation-duration: 1.2s; }
 }
 
 /* ユーザーが動き抑制を要求している場合は無効化 */
 @media (prefers-reduced-motion: reduce) {
-  #btn-howto-line.is-bouncing { animation: none !important; }
+  #btn-howto-line.is-bouncing,
+  #btn-final-line.is-bouncing { animation: none !important; }
 }
