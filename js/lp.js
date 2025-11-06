@@ -278,34 +278,62 @@
   if (stickyCTA) {
     let hasShownSticky = false;
     
+    // final-cta-sectionが表示されているかチェックする関数
+    function checkFinalCTAVisible() {
+      if (!finalCTASection) return false;
+      const rect = finalCTASection.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+    
+    // Sticky CTAの表示/非表示を更新する関数
+    function updateStickyCTA() {
+      if (!hasShownSticky) return;
+      if (checkFinalCTAVisible()) {
+        stickyCTA.classList.remove('visible');
+      } else {
+        stickyCTA.classList.add('visible');
+      }
+    }
+    
     // ストーリーセクションの監視
     if (storySection) {
       const storyObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
-          // 「私がITパスポートを教えることになった理由」ブロックが表示されたら、sticky CTAを表示
+          // ストーリーセクションが表示されたら、sticky CTAを表示開始
           if (entry.isIntersecting && !hasShownSticky) {
             hasShownSticky = true;
-            stickyCTA.classList.add('visible');
+            updateStickyCTA();
+          }
+          // ストーリーセクションを通過した後も表示を維持
+          if (!entry.isIntersecting && hasShownSticky) {
+            updateStickyCTA();
           }
         });
       }, {
-        threshold: 0.3
+        threshold: 0.01,
+        rootMargin: '0px'
       });
 
       storyObserver.observe(storySection);
+    } else {
+      // ストーリーセクションが見つからない場合は、スクロール量で判定
+      let scrollCheckDone = false;
+      window.addEventListener('scroll', function() {
+        if (scrollCheckDone || hasShownSticky) return;
+        if (window.scrollY > 1000) {
+          hasShownSticky = true;
+          scrollCheckDone = true;
+          updateStickyCTA();
+        }
+      }, { passive: true });
     }
     
-    // 最終CTAセクションが表示されている間はSticky CTAを非表示
+    // 最終CTAセクションの監視
     if (finalCTASection) {
       const finalCTAObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
           if (hasShownSticky) {
-            // 最終CTAセクションが表示されている間はSticky CTAを非表示
-            if (entry.isIntersecting) {
-              stickyCTA.classList.remove('visible');
-            } else {
-              stickyCTA.classList.add('visible');
-            }
+            updateStickyCTA();
           }
         });
       }, {
@@ -313,6 +341,17 @@
       });
 
       finalCTAObserver.observe(finalCTASection);
+      
+      // スクロールイベントでも最終CTAセクションの表示状態をチェック
+      let scrollTimeout = null;
+      window.addEventListener('scroll', function() {
+        if (!hasShownSticky) return;
+        
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+          updateStickyCTA();
+        }, 100);
+      }, { passive: true });
     }
   }
 

@@ -345,7 +345,7 @@ img {
    ============================================ */
 .pain-section {
   padding: 20px var(--spacing) 50px var(--spacing);
-  background: #ffffff;
+  background: var(--bg-light);
 }
 
 .pain-list {
@@ -393,7 +393,7 @@ img {
    ============================================ */
 .proof-section {
   padding: 30px var(--spacing) 50px var(--spacing);
-  background: #e8e8e8;
+  background: #ffffff;
 }
 
 .proof-section .section-title {
@@ -938,7 +938,7 @@ img {
 
 .results-section .section-title {
   color: #ffffff;
-  font-size: clamp(2.4rem, 5.5vw, 3.5rem);
+  font-size: clamp(2.16rem, 4.95vw, 3.15rem);
 }
 
 .results-section .section-subtitle {
@@ -1224,10 +1224,10 @@ img {
 }
 
 .intro-history-list li {
-  font-size: 1.15rem;
+  font-size: 1rem;
   color: var(--text);
   line-height: 1.6;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   padding-left: 1.5em;
   position: relative;
 }
@@ -1305,7 +1305,7 @@ img {
 }
 
 .section-title {
-  font-size: clamp(2.4rem, 5.5vw, 3.5rem);
+  font-size: clamp(2.16rem, 4.95vw, 3.15rem);
   font-weight: 900;
   text-align: center;
   margin-top: 0;
@@ -1423,7 +1423,7 @@ img {
 .content-content-section .section-title {
   color: #ffffff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 16px rgba(0, 0, 0, 0.5);
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-size: clamp(2.52rem, 5.4vw, 4.05rem);
   margin-bottom: 30px;
 }
 
@@ -1679,7 +1679,7 @@ img {
 }
 
 .final-cta-title {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(1.62rem, 3.6vw, 2.52rem);
   font-weight: 900;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
@@ -1990,7 +1990,7 @@ img {
   }
 
   .section-title {
-    font-size: 2.4rem;
+    font-size: 2.16rem;
   }
 
   .final-cta-section {
