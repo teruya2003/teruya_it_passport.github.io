@@ -604,22 +604,22 @@ img {
   margin: 0;
 }
 
-/* 凝縮されたノウハウへ誘導：ダブル下矢印 */
+/* 凝縮されたノウハウへ誘導：ダブル右矢印 */
 .condensed-indicator {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 14px;
-  margin-top: 6px;
+  margin-top: 20px;
 }
 
 .chevron-down {
-  width: 18px;
-  height: 18px;
-  border-right: 3px solid var(--primary);
-  border-bottom: 3px solid var(--primary);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid var(--primary);
   opacity: 0.9;
-  transform: rotate(45deg);
   animation: chevronPulse 1.6s infinite ease-in-out;
 }
 
@@ -628,9 +628,9 @@ img {
 }
 
 @keyframes chevronPulse {
-  0% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
-  50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
-  100% { transform: rotate(45deg) translateY(0); opacity: 0.6; }
+  0% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.6; }
 }
 
 /* ============================================
@@ -1017,9 +1017,20 @@ img {
   font-weight: 900;
   color: #ffffff;
   text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.stats-section-period {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
   margin-bottom: 25px;
   letter-spacing: 0.05em;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  opacity: 0.9;
 }
 
 .stats-section-title {
@@ -1653,6 +1664,7 @@ img {
   color: var(--text-muted);
   line-height: 1.8;
   padding-left: 36px;
+  font-size: 1rem;
 }
 
 /* ============================================
@@ -1712,7 +1724,7 @@ img {
    フッター
    ============================================ */
 .footer {
-  padding: 40px var(--spacing);
+  padding: 40px var(--spacing) 100px;
   background: var(--bg-dark);
   text-align: center;
   color: var(--text-muted);
@@ -1896,8 +1908,12 @@ img {
 }
 
 .fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: opacity, transform;
+}
+
+.story-item.fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ============================================
