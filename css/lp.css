@@ -1235,7 +1235,7 @@ img {
 }
 
 .intro-history-list li {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text);
   line-height: 1.6;
   margin-bottom: 4px;
