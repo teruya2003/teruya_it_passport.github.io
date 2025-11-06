@@ -584,3 +584,42 @@
   }
 
 })();
+
+// 追加: 受け取りボタンにバウンドクラスを付与 / 停止する制御
+(function(){
+  const howtoBtn = document.getElementById('btn-howto-line');
+  if (!howtoBtn) return;
+
+  const startBounce = () => howtoBtn.classList.add('is-bouncing');
+  const stopBounce  = () => howtoBtn.classList.remove('is-bouncing');
+
+  // ページ読み込み後に少し遅らせて開始
+  window.requestAnimationFrame(() => {
+    setTimeout(() => {
+      // IntersectionObserver が使えるなら視界に入ったら開始・停止
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(en => {
+            if (en.isIntersecting) startBounce();
+            else stopBounce();
+          });
+        }, { threshold: 0.35 });
+        io.observe(howtoBtn);
+      } else {
+        startBounce();
+      }
+    }, 600);
+  });
+
+  // ホバー／フォーカス中はアニメを停止（アクセシビリティ向上）
+  howtoBtn.addEventListener('mouseenter', stopBounce);
+  howtoBtn.addEventListener('mouseleave', startBounce);
+  howtoBtn.addEventListener('focus', stopBounce);
+  howtoBtn.addEventListener('blur', startBounce);
+
+  // クリック時は一旦停止してから再開（不意の動きを抑える）
+  howtoBtn.addEventListener('click', () => {
+    stopBounce();
+    setTimeout(startBounce, 800);
+  });
+})();

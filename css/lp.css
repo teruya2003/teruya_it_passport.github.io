@@ -2051,3 +2051,52 @@ img {
     font-size: 1.1rem;
   }
 }
+
+/* --- 追加: 受け取りボタンのバウンドアニメーション --- */
+@keyframes lp-bounce {
+  0%   { transform: translateY(0); }
+  20%  { transform: translateY(-10px); }
+  40%  { transform: translateY(0); }
+  60%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* ボタンリセット・画像内ボタン */
+.btn-image-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform-origin: center;
+}
+
+/* 画像内の余白がある場合は調整 */
+.line-cta-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* バウンドを付与するクラス（IDで指定） */
+#btn-howto-line.is-bouncing {
+  animation: lp-bounce 1.6s cubic-bezier(.22,.9,.3,1) infinite;
+  will-change: transform;
+}
+
+/* ホバー・フォーカス時はアニメ停止（ユーザー操作中の邪魔を防ぐ） */
+#btn-howto-line:hover,
+#btn-howto-line:focus {
+  animation-play-state: paused !important;
+}
+
+/* 画面幅が大きいときは控えめに */
+@media (min-width: 720px) {
+  #btn-howto-line.is-bouncing { animation-duration: 1.2s; }
+}
+
+/* ユーザーが動き抑制を要求している場合は無効化 */
+@media (prefers-reduced-motion: reduce) {
+  #btn-howto-line.is-bouncing { animation: none !important; }
+}
