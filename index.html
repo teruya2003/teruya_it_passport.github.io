@@ -28,13 +28,15 @@
     <main>
         <!-- ヒーローセクション -->
         <section id="hero" class="hero-section section">
-            <div class="hero-content">
-                <h1 class="hero-title">ITパスポート最短合格をサポート</h1>
-                <p class="hero-subtitle">IT未経験の方でも、正しい学習法で2～3ヶ月で合格を実現</p>
-                <a href="lp.html" class="hero-cta btn">無料テキストを受け取る</a>
-            </div>
-            <div class="hero-image">
-                <img src="./images/LP冒頭画像（女性＆こうすればよかったんだ！）.png" alt="ITパスポート合格サポート" loading="lazy">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">ITパスポート最短合格をサポート</h1>
+                    <p class="hero-subtitle">IT未経験の方でも、正しい学習法で2～3ヶ月で合格を実現</p>
+                    <a href="lp.html" class="hero-cta btn">無料テキストを受け取る</a>
+                </div>
+                <div class="hero-image">
+                    <img src="./images/LP冒頭画像（女性＆こうすればよかったんだ！）.png" alt="ITパスポート合格サポート" loading="lazy">
+                </div>
             </div>
         </section>
 
@@ -153,17 +155,35 @@
             </div>
         </section>
 
-        <!-- テキストの内容 -->
-        <section id="text-content" class="section text-content-section">
-            <h2>テキストの内容</h2>
-            <p>最短合格マニュアルの一部をご紹介します</p>
-            <div class="text-content-gallery">
-                <img src="./images/最短合格マニュアル/1.png" alt="テキスト内容" loading="lazy">
-                <img src="./images/最短合格マニュアル/2.png" alt="テキスト内容" loading="lazy">
-                <img src="./images/最短合格マニュアル/3.png" alt="テキスト内容" loading="lazy">
-                <img src="./images/最短合格マニュアル/4.png" alt="テキスト内容" loading="lazy">
-                <img src="./images/最短合格マニュアル/5.png" alt="テキスト内容" loading="lazy">
-                <img src="./images/最短合格マニュアル/6.png" alt="テキスト内容" loading="lazy">
+        <!-- お知らせ -->
+        <section id="news" class="section news-section">
+            <h2>お知らせ</h2>
+            <div class="news-list">
+                <div class="news-item">
+                    <span class="news-category news-category-announcement">お知らせ</span>
+                    <span class="news-date">2025年1月15日</span>
+                    <span class="news-title">無料テキスト「ITパスポート最短合格マニュアル」の配布を開始しました</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-category news-category-release">ニュースリリース</span>
+                    <span class="news-date">2025年1月10日</span>
+                    <span class="news-title">株式会社SystemyがITパスポート合格サポート事業を本格始動</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-category news-category-campaign">キャンペーン</span>
+                    <span class="news-date">2025年1月5日</span>
+                    <span class="news-title">新規登録者限定：個別サポート初回相談無料キャンペーン実施中</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-category news-category-announcement">お知らせ</span>
+                    <span class="news-date">2024年12月20日</span>
+                    <span class="news-title">公式Instagramアカウント「てるや＠未経験専門ITパスポート」フォロワー数が10,000人を突破</span>
+                </div>
+                <div class="news-item">
+                    <span class="news-category news-category-release">ニュースリリース</span>
+                    <span class="news-date">2024年12月10日</span>
+                    <span class="news-title">IT未経験者向けオンラインスクール「ITパスポート合格プロジェクト」を開講</span>
+                </div>
             </div>
         </section>
 
@@ -227,7 +247,7 @@
           }
         });
       }, {threshold: 0.15});
-      document.querySelectorAll('.section, .service-item, .mvv-item, .footer-section, .text-content-gallery img').forEach(el => {
+      document.querySelectorAll('.section, .service-item, .mvv-item, .footer-section, .news-item').forEach(el => {
         el.classList.add('will-inview');
         io.observe(el);
       });
