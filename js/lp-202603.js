@@ -74,4 +74,20 @@
   });
 
   applyRandomSupportImages();
+
+  // 参加者の声の合格実績ギャラリーの無限スクロールアニメーション
+  function duplicateImages(gallery) {
+    if (!gallery) return;
+    const images = gallery.querySelectorAll(".result-image");
+    const imageArray = Array.from(images);
+    imageArray.forEach((img) => {
+      const clone = img.cloneNode(true);
+      gallery.appendChild(clone);
+    });
+  }
+
+  const voiceGallery1 = document.getElementById("voiceGallery1");
+  const voiceGallery2 = document.getElementById("voiceGallery2");
+  if (voiceGallery1) duplicateImages(voiceGallery1);
+  if (voiceGallery2) duplicateImages(voiceGallery2);
 })();
