@@ -948,18 +948,8 @@ img {
 
 .results-gallery-wrapper {
   margin: 0 0 40px 0;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   position: relative;
-  -webkit-overflow-scrolling: touch; /* iOS スムーススクロール */
-  scroll-behavior: smooth;
-  /* スクロールバーを非表示（必要に応じて） */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-
-.results-gallery-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
 }
 
 .gallery-title {
@@ -979,21 +969,9 @@ img {
   animation-duration: 60s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  animation-play-state: paused;
   user-select: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  /* タッチ操作を許可 */
-  touch-action: pan-x pan-y pinch-zoom;
-}
-
-.results-gallery.scrolling {
-  animation-play-state: paused;
-}
-
-/* ホバー時は自動スクロールを一時停止（PCのみ） */
-.results-gallery-wrapper:hover .results-gallery {
-  animation-play-state: paused;
 }
 
 /* サポート実績セクション */
@@ -1110,32 +1088,24 @@ img {
   letter-spacing: 0.05em;
 }
 
-/* 右スクロール（左から右へ） */
+/* 右から左へ流れる（gallery1） */
 .results-gallery-right {
-  animation-name: scrollRight;
+  animation-name: marqueeLeft;
 }
 
-/* 左スクロール（右から左へ） */
+/* 左から右へ流れる（gallery2） */
 .results-gallery-left {
-  animation-name: scrollLeft;
+  animation-name: marqueeRight;
 }
 
-@keyframes scrollRight {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-@keyframes scrollLeft {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0);
-  }
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 
 .result-image {
@@ -1160,10 +1130,6 @@ img {
   border-color: rgba(155, 130, 107, 0.5);
 }
 
-/* ホバー時は一時停止 */
-.results-gallery-wrapper:hover .results-gallery {
-  animation-play-state: paused;
-}
 
 /* ============================================
    自己紹介セクション
@@ -1947,7 +1913,8 @@ img {
   }
 
   .hook-copy-line2 {
-    font-size: 2.7rem;
+    font-size: min(2.7rem, 9vw);
+    white-space: nowrap;
     text-decoration-thickness: 2px;
     text-underline-offset: 20px;
   }
@@ -2211,7 +2178,7 @@ img {
   }
 
   .hook-copy-line2 {
-    font-size: 2.4rem;
+    font-size: min(2.4rem, 9vw);
   }
 
   .stats-grid {

@@ -415,205 +415,48 @@
   });
 
   // ============================================
-  // 合格実績ギャラリー（自動スクロール + タッチ操作）
+  // 合格実績ギャラリー（CSS アニメーション + JS 制御）
   // ============================================
-  const resultsGallery1 = document.getElementById('resultsGallery1');
-  const resultsGallery2 = document.getElementById('resultsGallery2');
-  
-  // 画像を複製して無限スクロールを実現
-  function duplicateImages(gallery) {
+  function initGallery(galleryId) {
+    const gallery = document.getElementById(galleryId);
     if (!gallery) return;
-    
-    const images = gallery.querySelectorAll('.result-image');
-    const imageArray = Array.from(images);
-    
-    // 画像を複製して追加（無限スクロール用）
-    imageArray.forEach(img => {
-      const clone = img.cloneNode(true);
-      gallery.appendChild(clone);
+    const wrapper = gallery.parentElement;
+
+    // 画像を末尾に複製してシームレスループを実現
+    Array.from(gallery.querySelectorAll('.result-image')).forEach(img => {
+      gallery.appendChild(img.cloneNode(true));
     });
-  }
-  
-  // 自動スクロール管理機能（無限ループ改善版）
-  function setupTouchScroll(gallery, isRightScroll) {
-    if (!gallery) return;
-    
-    const wrapper = gallery.parentElement; // .results-gallery-wrapper
+
+    // 複製後の描画を待ってからアニメーション開始（黒画面防止）
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      gallery.style.animationPlayState = 'running';
+    }));
+
     if (!wrapper) return;
-    
-    // 画像の幅を取得して、1セット分の幅を計算
-    const images = gallery.querySelectorAll('.result-image');
-    if (images.length === 0) return;
-    
-    const firstImage = images[0];
-    const imageWidth = firstImage.offsetWidth || 280;
-    const gap = 20;
-    const singleSetWidth = (imageWidth + gap) * images.length - gap; // 1セット分の幅
-    
-    let autoScrollInterval = null;
-    let isUserInteracting = false;
-    let isScrolling = false;
-    
-    // 無限ループチェック関数
-    function checkAndResetScroll() {
-      if (isScrolling) return; // リセット中は処理しない
-      
-      const scrollLeft = wrapper.scrollLeft;
-      const scrollWidth = wrapper.scrollWidth;
-      const clientWidth = wrapper.clientWidth;
-      const maxScroll = scrollWidth - clientWidth;
-      
-      // 右スクロールの場合：最後の画像に到達したら最初に戻る
-      if (isRightScroll) {
-        if (scrollLeft >= singleSetWidth - 10) { // 少し余裕を持たせる
-          isScrolling = true;
-          wrapper.scrollLeft = 0;
-          setTimeout(() => {
-            isScrolling = false;
-          }, 50);
-        }
-      } 
-      // 左スクロールの場合：最初の画像に到達したら最後に戻る
-      else {
-        if (scrollLeft <= 10) { // 少し余裕を持たせる
-          isScrolling = true;
-          wrapper.scrollLeft = singleSetWidth;
-          setTimeout(() => {
-            isScrolling = false;
-          }, 50);
-        }
-      }
-    }
-    
-    // 自動スクロール関数
-    function startAutoScroll() {
-      if (autoScrollInterval) return;
-      
-      autoScrollInterval = setInterval(() => {
-        if (!isUserInteracting && wrapper && !isScrolling) {
-          const currentScroll = wrapper.scrollLeft;
-          
-          // スクロール位置を更新
-          if (isRightScroll) {
-            wrapper.scrollLeft = currentScroll + 1; // 右スクロール（左から右へ）
-          } else {
-            wrapper.scrollLeft = currentScroll - 1; // 左スクロール（右から左へ）
-          }
-          
-          // 無限ループチェック
-          checkAndResetScroll();
-        }
-      }, 30); // 30msごとに更新（スムーズな動き）
-    }
-    
-    function stopAutoScroll() {
-      if (autoScrollInterval) {
-        clearInterval(autoScrollInterval);
-        autoScrollInterval = null;
-      }
-    }
-    
-    // ユーザーがスクロールしているかを検出
-    let scrollTimeout = null;
-    let lastScrollLeft = wrapper.scrollLeft;
-    
-    wrapper.addEventListener('scroll', function() {
-      // ユーザーが手動でスクロールしているかチェック
-      const currentScroll = wrapper.scrollLeft;
-      const scrollDiff = Math.abs(currentScroll - lastScrollLeft);
-      
-      if (scrollDiff > 5) { // 5px以上動いていたらユーザー操作と判断
-        isUserInteracting = true;
-        stopAutoScroll();
-        
-        // 無限ループチェック（ユーザー操作時も）
-        checkAndResetScroll();
-      }
-      
-      lastScrollLeft = currentScroll;
-      
-      // スクロールが止まったら自動スクロールを再開
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        isUserInteracting = false;
-        startAutoScroll();
-      }, 2000); // 2秒間操作がなければ再開
-    }, { passive: true });
-    
-    // タッチ開始時に自動スクロールを停止
-    wrapper.addEventListener('touchstart', function() {
-      isUserInteracting = true;
-      stopAutoScroll();
-    }, { passive: true });
-    
-    // タッチ終了時に一定時間後に自動スクロールを再開
-    wrapper.addEventListener('touchend', function() {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        isUserInteracting = false;
-        startAutoScroll();
-      }, 2000);
-    }, { passive: true });
-    
-    // ホバー時に自動スクロールを一時停止（PCのみ）
-    wrapper.addEventListener('mouseenter', function() {
-      stopAutoScroll();
+
+    // ホバーで一時停止（PC）
+    wrapper.addEventListener('mouseenter', () => {
+      gallery.style.animationPlayState = 'paused';
     });
-    
-    wrapper.addEventListener('mouseleave', function() {
-      if (!isUserInteracting) {
-        startAutoScroll();
-      }
+    wrapper.addEventListener('mouseleave', () => {
+      gallery.style.animationPlayState = 'running';
     });
-    
-    // 初期化：自動スクロールを開始
-    setTimeout(() => {
-      // 左スクロールの場合は、最初に右端に移動
-      if (!isRightScroll) {
-        setTimeout(() => {
-          const scrollWidth = wrapper.scrollWidth;
-          const clientWidth = wrapper.clientWidth;
-          wrapper.scrollLeft = scrollWidth - clientWidth;
-        }, 100);
-      }
-      
-      setTimeout(() => {
-        startAutoScroll();
-      }, 500);
-    }, 1000);
-  }
-  
-  if (resultsGallery1) {
-    duplicateImages(resultsGallery1);
-    setupTouchScroll(resultsGallery1, true); // 右スクロール
-  }
-  
-  if (resultsGallery2) {
-    duplicateImages(resultsGallery2);
-    setupTouchScroll(resultsGallery2, false); // 左スクロール
+
+    // タッチで一時停止（モバイル）
+    let touchTimer;
+    wrapper.addEventListener('touchstart', () => {
+      clearTimeout(touchTimer);
+      gallery.style.animationPlayState = 'paused';
+    }, { passive: true });
+    wrapper.addEventListener('touchend', () => {
+      touchTimer = setTimeout(() => {
+        gallery.style.animationPlayState = 'running';
+      }, 1500);
+    }, { passive: true });
   }
 
-  // ネイティブスクロールのスナップ動作を無効化（スムーズなスクロールのため）
-  document.querySelectorAll('.results-gallery-wrapper').forEach(wrapper => {
-    wrapper.style.scrollSnapType = 'none';
-  });
-  
-  // 画像読み込み完了時の処理
-  document.querySelectorAll('.result-image').forEach(img => {
-    img.addEventListener('load', function() {
-      this.classList.add('loaded');
-    });
-    
-    // 既に読み込まれている場合
-    if (img.complete) {
-      img.classList.add('loaded');
-    }
-    
-    // エラーハンドリング
-    img.addEventListener('error', function() {
-      console.warn('画像の読み込みに失敗しました:', this.src);
-    });
-  });
+  initGallery('resultsGallery1');
+  initGallery('resultsGallery2');
 
   // ============================================
   // デバッグ用: トラッキングデータの確認
