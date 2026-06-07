@@ -24,7 +24,7 @@ jobs:
       - name: Deploy via rsync
         run: |
           rsync -avz --delete \
-            -e "ssh -p 10022 -o StrictHostKeyChecking=no" \
+            -e "ssh -p 10022 -v -o StrictHostKeyChecking=no" \
             --exclude='.git' \
             --exclude='.github' \
             --exclude='*.md' \
