@@ -35,12 +35,30 @@ html {
 
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
-  background: var(--bg);
+  background: #ddd8d2;
   color: var(--text);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.5rem;
+}
+
+/* ============================================
+   LP ラッパー（PC でスマホLPのように表示）
+   ============================================ */
+#lp-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.18);
+}
+
+/* スマホ幅では box-shadow を非表示（横スクロール防止） */
+@media (max-width: 499px) {
+  #lp-wrapper { box-shadow: none; }
 }
 
 .container {
@@ -163,7 +181,7 @@ img {
 }
 
 .hook-copy-line2 {
-  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-size: min(2.7rem, 9vw);
   font-weight: 700;
   color: #333333;
   line-height: 1.2;
@@ -175,6 +193,7 @@ img {
   text-underline-offset: 8px;
   width: 100%;
   display: block;
+  white-space: nowrap;
   opacity: 0;
   transform: translateX(100px);
   transition: none;
@@ -833,7 +852,9 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  width: 100%;
 }
 
 /* 画像ボタン用のリセット（背景や余白を無効化） */
@@ -843,12 +864,15 @@ img {
   padding: 0;
   cursor: pointer;
   line-height: 0;
+  display: block;
+  margin: 0 auto;
 }
 
 .line-cta-image {
   width: min(100%, 420px);
   height: auto;
   display: block;
+  margin: 0 auto;
 }
 
 .line-cta-hint {
@@ -1721,6 +1745,19 @@ img {
   transform: translateY(0);
 }
 
+/* PC でもラッパー幅（480px）に揃える */
+@media (min-width: 500px) {
+  .sticky-cta {
+    left: 50%;
+    right: auto;
+    width: 480px;
+    transform: translateX(-50%) translateY(100%);
+  }
+  .sticky-cta.visible {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 .btn-sticky {
   width: 100%;
   padding: 16px;
@@ -2221,7 +2258,8 @@ img {
   background: none;
   border: none;
   padding: 0;
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transform-origin: center;
