@@ -308,23 +308,19 @@ strong { font-weight: 900; }
 }
 .price__main { font-size: 20px; font-weight: 900; }
 .price__main strong { font-size: 60px; color: var(--teal-dark); line-height: 1.15; margin: 0 2px; letter-spacing: 0; }
-.price__main small { font-size: 14px; color: var(--ink-sub); font-weight: 700; }
+.price__main small { font-size: 14px; color: var(--ink-sub); font-weight: 700; white-space: nowrap; }
 .price__regular { margin-top: 4px; font-size: 15px; font-weight: 700; }
 .price__later { font-size: 13px; color: var(--ink-sub); margin-top: 8px; }
 .price__tags { display: flex; justify-content: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
 .price__tags { gap: 4px 20px; }
 .price__tags li { font-size: 14px; font-weight: 900; color: var(--teal-deep); }
 .price__tags li::before { content: "\2713  "; }
-.price__example { margin-top: 24px; border-top: 1px dashed #9fb7bb; border-bottom: 1px dashed #9fb7bb; padding: 16px 0; }
-.price__example-title { font-weight: 700; font-size: 14px; color: var(--ink-sub); }
-.price__calc { font-size: 16px; font-weight: 700; margin-top: 4px; }
-.price__calc strong { display: block; font-size: 30px; color: var(--ink); }
-.price__example-sub { font-size: 14px; }
 
 /* ---------- 8. 講師 ---------- */
 .teacher { display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
 .teacher__photo { width: 160px; height: 160px; flex: none; border-radius: 50%; object-fit: cover; }
 .teacher__name { font-size: 28px; font-weight: 900; }
+.teacher__realname { display: block; font-size: 15px; font-weight: 700; margin-top: 2px; }
 .teacher__name small { display: block; font-size: 13px; color: var(--ink-sub); font-weight: 500; }
 .teacher__career { margin-top: 12px; text-align: left; border-top: 2px solid var(--ink); }
 .teacher__career li {
