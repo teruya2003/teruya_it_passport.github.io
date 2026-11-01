@@ -134,20 +134,14 @@ strong { font-weight: 900; }
 .hero__points small { font-size: 11px; font-weight: 700; margin-bottom: 2px; }
 
 .price-badge {
-  position: relative; margin: 40px auto 0; max-width: 420px;
+  position: relative; margin: 32px auto 0; max-width: 420px;
   background: var(--white); border: 3px solid var(--teal); border-radius: var(--radius);
-  padding: 26px 16px 14px; text-align: center;
-}
-.price-badge__ribbon {
-  position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
-  white-space: nowrap; background: var(--red); color: var(--white);
-  font-size: 13px; font-weight: 900; padding: 4px 16px; border-radius: 2px;
+  padding: 16px 16px 16px; text-align: center;
 }
 .price-badge__main { font-size: 18px; font-weight: 900; }
 .price-badge__main strong { font-size: 54px; color: var(--teal-dark); line-height: 1.15; margin: 0 2px; letter-spacing: 0; }
 .price-badge__main small { font-size: 13px; color: var(--ink-sub); font-weight: 700; }
 .price-badge__sub { font-size: 14px; font-weight: 700; }
-.price-badge__note { font-size: 12px; color: var(--ink-sub); margin-top: 2px; }
 
 /* ---------- イメージ写真 ---------- */
 .photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; margin-bottom: 24px; }
@@ -302,15 +296,10 @@ strong { font-weight: 900; }
   background: var(--white); border: 3px solid var(--teal); border-radius: var(--radius);
   padding: 28px 20px; text-align: center;
 }
-.price__first {
-  display: inline-block; margin-bottom: 8px; background: var(--red); color: var(--white); border-radius: 2px;
-  padding: 4px 20px; font-weight: 900; font-size: 14px;
-}
 .price__main { font-size: 20px; font-weight: 900; }
 .price__main strong { font-size: 60px; color: var(--teal-dark); line-height: 1.15; margin: 0 2px; letter-spacing: 0; }
 .price__main small { font-size: 14px; color: var(--ink-sub); font-weight: 700; white-space: nowrap; }
 .price__regular { margin-top: 4px; font-size: 15px; font-weight: 700; }
-.price__later { font-size: 13px; color: var(--ink-sub); margin-top: 8px; }
 .price__tags { display: flex; justify-content: center; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
 .price__tags { gap: 4px 20px; }
 .price__tags li { font-size: 14px; font-weight: 900; color: var(--teal-deep); }
@@ -374,16 +363,10 @@ strong { font-weight: 900; }
 .final__sub { display: block; font-size: 18px; margin-top: 10px; }
 .final__price {
   margin: 40px auto 0; max-width: 420px; background: var(--white); color: var(--ink);
-  border-radius: var(--radius); padding: 22px 16px 16px; position: relative; font-weight: 700; font-size: 15px; line-height: 1.6;
+  border-radius: var(--radius); padding: 18px 16px 16px; position: relative; font-weight: 700; font-size: 15px; line-height: 1.6;
 }
 .final__price strong { font-size: 40px; color: var(--teal-dark); letter-spacing: 0; }
 .final__price small { font-size: 13px; color: var(--ink-sub); }
-.final__limit {
-  position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); white-space: nowrap;
-  background: var(--red); color: var(--white); font-size: 13px; font-weight: 900;
-  border-radius: 2px; padding: 3px 16px;
-}
-.final__price br:first-of-type { display: none; }
 .final__note { margin-top: 28px; font-size: 13px; line-height: 1.8; opacity: .95; }
 
 /* ---------- 12. フッター ---------- */
